@@ -1,4 +1,4 @@
-
+const errorHandle = document.getElementById("error-part")
 
 // search phone
 const allPhones = () => {
@@ -10,21 +10,34 @@ const allPhones = () => {
 };
 
 const showPhoneDetails = phones => {
-    for (const phone of phones) {
-        const parent = document.getElementById('phone-container');
-        const div = document.createElement('div');
-        div.innerHTML = `<div class="card border p-5 card w-100">
-            <div class="phone-pic">
-                <img class="w-25" src="${phone.image}" alt="">
+    if (phones.length === 0) {
+        error.textContent = 'No Result Found. Try Again'
+        document.getElementById('error-msg').style.display = 'block';
+
+    }
+    else {
+        for (const phone of phones) {
+            const parent = document.getElementById('phone-container');
+            const div = document.createElement('div');
+            div.innerHTML = `
+        <div>
+            <div class="card border p-5 card w-100">
+                <div class="phone-pic">
+                    <img class="w-25" src="${phone.image}" alt="">
+                </div>
+                <h2>Name:${phones.brand}</h2>
+                <h5>Model:${phone.phone_name} </h5>
+                <p></p>
+                <div class="all-button">
+                    <button onclick="details('${phone.slug}')" class="btn btn-success">Details</button>
+                </div>
             </div>
-            <h2>Name:${phones.brand}</h2>
-            <h5>Model:${phone.phone_name} </h5>
-            <p></p>
-            <div class="all-button">
-                <button onclick="details('${phone.slug}')" class="btn btn-success">Details</button>
-            </div>
-       </div>`;
-        parent.appendChild(div);
+       </div>
+       `;
+
+            parent.appendChild(div);
+        }
+        document.getElementById('error-msg').style.display = 'none';
     }
 
 
@@ -49,7 +62,6 @@ const setDetails = info => {
         <p>others: ${info?.others?.Bluetooth ? info.others?.Bluetooth : 'Not found'}</p>
     </div>
    `
-
 }
 
 
