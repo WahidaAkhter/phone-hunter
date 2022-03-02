@@ -20,13 +20,13 @@ const showPhoneDetails = phones => {
             const parent = document.getElementById('phone-container');
             const div = document.createElement('div');
             div.innerHTML = `
-        <div>
+        <div class="col">
             <div class="card border p-5 card w-100">
                 <div class="phone-pic">
                     <img class="w-25" src="${phone.image}" alt="">
                 </div>
-                <h2>Name:${phones.brand}</h2>
-                <h5>Model:${phone.phone_name} </h5>
+                <h2 class="text-dark">Name:${phone.brand}</h2>
+                <h5 class="text-dark">Model:${phone.phone_name} </h5>
                 <p></p>
                 <div class="all-button">
                     <button onclick="details('${phone.slug}')" class="btn btn-success">Details</button>
@@ -44,7 +44,7 @@ const showPhoneDetails = phones => {
 };
 // phone details part 
 const details = (id) => {
-    const url = ` https://openapi.programming-hero.com/api/phone/${id}`
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`
     fetch(url)
         .then(response => response.json())
         .then(data => setDetails(data.data));
@@ -63,6 +63,3 @@ const setDetails = info => {
     </div>
    `
 }
-
-
-
